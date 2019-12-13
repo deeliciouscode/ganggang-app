@@ -1,0 +1,9 @@
+.custom-background-img {
+    position: fixed; 
+    width: calc(100vw);
+    height: calc(100vh);
+    z-index: -100;
+    left: 0vw;
+    top: 0vw; 
+    border-radius: 10px;
+}

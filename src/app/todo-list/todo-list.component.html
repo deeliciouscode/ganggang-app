@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div *ngFor="let item of todo_list" class="custom-border-thin custom-padding-thin custom-margin-thin col-lg-3 custom-size-small custom-background-item">
+            <h4 class="custom-h3">{{ item.name }}</h4>
+            <p class="custom-p">{{ item.text | summary:80 }}</p>
+            <done-field [isDone]="item.isDone" (click)="toggleDone(item)"></done-field>
+        </div>
+    </div>
+</div>
+
+<div class="custom-add-form" *ngIf="taskCreatorIsVisible">
+        <form>
+            <div class="form-group">
+                <input [(ngModel)]="taskTitle" name="taskTitle" type="text" class="form-control" id="title-id" placeholder="Enter Title">
+            </div>
+            <div class="form-group">
+                <input [(ngModel)]="taskDescription" name="taskDescription" type="text" class="form-control" id="title-id" placeholder="Enter Description">
+            </div>
+        </form>
+    <button type="submit" (click)="addItem()" class="btn btn-primary">Submit</button>
+</div>
+<app-add-item (click)="showForm()"></app-add-item>

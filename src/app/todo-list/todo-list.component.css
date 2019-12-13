@@ -1,0 +1,67 @@
+::ng-deep :root {
+    --thin_margin: 0.4em;
+    --thin-padding: 5px;
+    --thin-margin: 10px;
+    --item-width: calc(((100vw - 16px) / 2) - (var(--thin-margin) * 2) - 7px); 
+    background-color: black;
+    
+    --form-padding: 15px;
+    --form-width: calc(100vw - 16px - (2 * var(--form-padding)) - 4px);
+    --form-height: 50vh;
+}
+
+h4, p {
+    font-family: "Arial", Arial, sans-serif;
+}
+
+p {
+    font-size: 12px;
+}
+
+.custom-add-form {
+    position: fixed;
+    width: var(--form-width);
+    height: var(--form-height);
+    background-color: rgba(202, 202, 202, 0.98);
+    z-index: 100;
+    top: 25vh;
+    left: 8px;
+    padding: 0px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: var(--form-padding);
+}
+
+.custom-border-thin {
+    border-radius: 5px;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.custom-padding-thin {
+    padding: var(--thin-padding);
+}
+
+.custom-margin-thin {
+    margin: var(--thin_margin);
+}
+
+.custom-size-small {
+    width: var(--item-width);
+    display: inline-block;
+}
+
+.custom-h3 {
+    margin-block-start: var(--thin_margin, 0.4em);
+    margin-block-end: var(--thin_margin, 0.4em);
+}
+
+.custom-p {
+    margin-block-start: var(--thin_margin, 0.4em);
+    margin-block-end: var(--thin_margin, 0.4em);
+}
+
+.custom-background-item {
+    background-color: rgba(255, 255, 255, 0.5);
+}

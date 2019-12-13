@@ -1,0 +1,32 @@
+::ng-deep :root {
+    --navbar-height: calc(100vh / 15);
+}
+
+h3 {
+    font-family: "Arial", Arial, sans-serif;
+}
+
+.custom-nav-bar-wrapper {
+    height: var(--navbar-height);
+    width: calc(100vw - 16px);
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    position: relative;
+}
+.custom-nav-bar {
+    height: var(--navbar-height);
+    width: calc(100vw - 16px);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    position: fixed;
+
+}
+.custom-nav-link {
+    display: inline;
+    margin: 9%;
+    line-height: var(--navbar-height);
+}
+.custom-item-wrapper {
+    text-align: center;
+    height: inherit;
+}

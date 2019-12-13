@@ -1,0 +1,19 @@
+.custom-small-size {
+    width: 25px;
+    height: 25px;
+}
+
+.custom-ball-green {
+    border-radius: 50%;
+    background-color: green;
+}
+
+.custom-ball-red {
+    border-radius: 50%;
+    background-color: red;
+}
+
+.custom-indicator {
+    margin-block-start: 0.3em;
+    margin-block-end: 0.3em;
+}
