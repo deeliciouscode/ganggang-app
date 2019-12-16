@@ -1,8 +1,8 @@
 <div class="container">
     <div class="row">
-        <div *ngFor="let item of todo_list" class="custom-border-thin custom-padding-thin custom-margin-thin col-lg-3 custom-size-small custom-background-item">
-            <h4 class="custom-h3">{{ item.name }}</h4>
-            <p class="custom-p">{{ item.text | summary:80 }}</p>
+        <div *ngFor="let item of todos | async" class="custom-border-thin custom-padding-thin custom-margin-thin col-lg-3 custom-size-small custom-background-item">
+            <h4 class="custom-h3">{{ item.title }}</h4>
+            <p class="custom-p">{{ item.desc | summary:50 }}</p>
             <done-field [isDone]="item.isDone" (click)="toggleDone(item)"></done-field>
         </div>
     </div>

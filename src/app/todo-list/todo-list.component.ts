@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoListService } from '../todo-list.service';
+// import { TodoListService } from '../todo-list.service';
 import { TodoListItem } from '../todo-list-item/todo-list-item';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs'
+
+export interface Todo {
+    title: string;
+    desc: string;
+    isDone: boolean;
+}
 
 @Component({
   selector: 'todo-list',
@@ -8,26 +16,16 @@ import { TodoListItem } from '../todo-list-item/todo-list-item';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
-  title = "Todo's for the Gang"
-  lorem_ipsum = `Lorem ipsum dolor sit amet, consectetur 
-                adipiscing elit, sed do eiusmod tempor incididunt 
-                ut labore et dolore magna aliqua. Ut enim ad minim 
-                veniam, quis nostrud exercitation ullamco laboris 
-                nisi ut aliquip ex ea commodo consequat.`
-  private todo_list: Array<TodoListItem>;
 
   taskCreatorIsVisible: boolean = false;
   taskTitle: string = "";
   taskDescription: string = "";
+  private todosCollection: AngularFirestoreCollection<Todo>;
+  todos: Observable<Todo[]>;
 
-
-  constructor(service: TodoListService) {
-    this.todo_list = Array();
-    this.createListElements(service.getTodoList());
-  }
-
-  createListElements(list) {
-    list.forEach(e => { this.todo_list.push(new TodoListItem(e, this.lorem_ipsum, false))});
+  constructor(private db: AngularFirestore) {
+      this.todosCollection = db.collection<Todo>('gang-todo');
+      this.todos = this.todosCollection.valueChanges();
   }
 
   toggleDone(item: TodoListItem) {
@@ -39,7 +37,12 @@ export class TodoListComponent implements OnInit {
   }
 
   addItem() {
-    this.todo_list.push(new TodoListItem(this.taskTitle, this.taskDescription, false))
+    let newTodo: Todo = {
+        title: this.taskTitle,
+        desc: this.taskDescription,
+        isDone: false
+    }
+    // TODO: implement an update function and publish app on firebase.
     this.taskCreatorIsVisible = false;
     this.taskTitle = "";
     this.taskDescription = "";

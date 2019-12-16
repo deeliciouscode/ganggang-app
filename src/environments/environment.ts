@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyCjKXOFrx_NXhBL7Eq5C5__Btp5laGONSY",
+    authDomain: "ganggang-app.firebaseapp.com",
+    databaseURL: "https://ganggang-app.firebaseio.com",
+    projectId: "ganggang-app",
+    storageBucket: "ganggang-app.appspot.com",
+    messagingSenderId: "35166306955",
+    appId: "1:35166306955:web:43cdeded70854195080a8e"
+  }
 };
 
 /*

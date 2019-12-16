@@ -8,13 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class NavBarComponent implements OnInit {
 
   navList = [{
-    name: "home",
+    name: "Home",
     desc: "the home page of the app"
   }, {
-    name: "todo",
+    name: "Todo",
     desc: "the todo page of the app"
   }, {
-    name: "clean",
+    name: "Clean",
     desc: "the clean page of the app"
   }]
 
