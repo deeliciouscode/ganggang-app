@@ -3,7 +3,13 @@
         <div *ngFor="let item of todos | async" class="custom-border-thin custom-padding-thin custom-margin-thin col-lg-3 custom-size-small custom-background-item">
             <h4 class="custom-h3">{{ item.title }}</h4>
             <p class="custom-p">{{ item.desc | summary:50 }}</p>
-            <done-field [isDone]="item.isDone" (click)="toggleDone(item)"></done-field>
+            <p class="custom-p">{{ item.fsID }}</p>
+            <done-field [isDone]="item.isDone" (change)="onDoneChanged(
+                {
+                    isDone: $event,
+                    fsID: item.fsID
+                }
+            )"></done-field>
         </div>
     </div>
 </div>

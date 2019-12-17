@@ -8,6 +8,7 @@ export interface Todo {
     title: string;
     desc: string;
     isDone: boolean;
+    fsID: string;
 }
 
 @Component({
@@ -25,30 +26,33 @@ export class TodoListComponent implements OnInit {
 
   constructor(private db: AngularFirestore) {
       this.todosCollection = db.collection<Todo>('gang-todo');
-      this.todos = this.todosCollection.valueChanges();
+      this.todos = this.todosCollection.valueChanges({idField: "fsID"});
+      console.log(this.todos)
   }
 
-  toggleDone(item: TodoListItem) {
-    item.isDone = !item.isDone;
+  addItem() {
+    const id = this.db.createId();
+    const item: Todo = { 
+      title: this.taskTitle, 
+      desc: this.taskDescription, 
+      isDone: false, 
+      fsID: id 
+    }
+
+    this.todosCollection.doc(id).set(item);
+    this.taskCreatorIsVisible = false;
   }
 
+  onDoneChanged(updatedObj) {
+    const id = updatedObj.fsID;
+    const doneField = { isDone: updatedObj.isDone }
+    this.todosCollection.doc(id).update(doneField)
+  }
+ 
   showForm() {
     this.taskCreatorIsVisible = true;
   }
 
-  addItem() {
-    let newTodo: Todo = {
-        title: this.taskTitle,
-        desc: this.taskDescription,
-        isDone: false
-    }
-    // TODO: implement an update function and publish app on firebase.
-    this.taskCreatorIsVisible = false;
-    this.taskTitle = "";
-    this.taskDescription = "";
-  }
-
   ngOnInit() {
   }
-
 }

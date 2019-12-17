@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'done-field',
@@ -7,10 +7,15 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class DoneFieldComponent implements OnInit {
   @Input() isDone: boolean;
+  @Output() change = new EventEmitter();
 
   constructor() {
-    this.isDone = true;
    }
+
+  onClick() {
+    this.isDone = !this.isDone;
+    this.change.emit(this.isDone);
+  }
 
   ngOnInit() {
   }
