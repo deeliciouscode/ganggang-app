@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 // import { TodoListService } from '../todo-list.service';
-import { TodoListItem } from '../todo-list-item/todo-list-item';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs'
 
@@ -18,11 +17,24 @@ export interface Todo {
 })
 export class TodoListComponent implements OnInit {
 
-  taskCreatorIsVisible: boolean = false;
   taskTitle: string = "";
   taskDescription: string = "";
   private todosCollection: AngularFirestoreCollection<Todo>;
   todos: Observable<Todo[]>;
+  showMenu = false;
+  showTaskAdder = false;
+
+  deleteElement(fsID) {
+    this.todosCollection.doc(fsID).delete();
+  }
+
+  toggleTaskAdder() {
+    this.showTaskAdder = !this.showTaskAdder;
+  }
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
 
   constructor(private db: AngularFirestore) {
       this.todosCollection = db.collection<Todo>('gang-todo');
@@ -38,19 +50,17 @@ export class TodoListComponent implements OnInit {
       isDone: false, 
       fsID: id 
     }
-
-    this.todosCollection.doc(id).set(item);
-    this.taskCreatorIsVisible = false;
+    if (this.taskTitle !== "" && this.taskDescription !== "") {
+      this.todosCollection.doc(id).set(item);
+    }
+    this.taskTitle = "";
+    this.taskDescription = "";
   }
 
   onDoneChanged(updatedObj) {
     const id = updatedObj.fsID;
     const doneField = { isDone: updatedObj.isDone }
     this.todosCollection.doc(id).update(doneField)
-  }
- 
-  showForm() {
-    this.taskCreatorIsVisible = true;
   }
 
   ngOnInit() {

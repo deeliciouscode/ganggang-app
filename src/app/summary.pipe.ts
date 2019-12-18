@@ -9,6 +9,9 @@ export class SummaryPipe implements PipeTransform {
             return null;
 
         let actualLimit = (limit) ? limit : 50;
-        return value.substr(0, actualLimit) + '...'; 
+        if (value.length > actualLimit)
+            return value.substr(0, actualLimit) + '...';
+        else 
+            return value;
     }
 }

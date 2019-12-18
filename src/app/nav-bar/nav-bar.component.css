@@ -1,5 +1,6 @@
 ::ng-deep :root {
     --navbar-height: calc(100vh / 15);
+    --thin_5px_margin: 5px;
 }
 
 h3 {
@@ -21,12 +22,19 @@ h3 {
     position: fixed;
 
 }
-.custom-nav-link {
-    display: inline;
-    margin: 9%;
-    line-height: var(--navbar-height);
+.custom-menu-icon {
+    width: var(--navbar-height);
+    height: var(--navbar-height);
+    z-index: 100;
+    background-size: contain;
+    float: left;
 }
-.custom-item-wrapper {
-    text-align: center;
-    height: inherit;
+.custom-filter-icon {
+    width: calc(var(--navbar-height) - var(--thin_5px_margin));
+    height: calc(var(--navbar-height) - var(--thin_5px_margin));
+    float: right;
+    margin: 5px;
+    z-index: 100;
+    background-size: contain;
+    background-repeat: no-repeat;
 }

@@ -1,9 +1,12 @@
+
+  <app-nav-bar (click)="toggleMenu()"></app-nav-bar>
+
 <div class="container">
     <div class="row">
-        <div *ngFor="let item of todos | async" class="custom-border-thin custom-padding-thin custom-margin-thin col-lg-3 custom-size-small custom-background-item">
+        <div *ngFor="let item of todos | async" class="custom-todo-item custom-border-thin custom-padding-thin custom-margin-thin col-lg-3 custom-size-small custom-background-item">
+            <div class="custom-delete-on-hover" (click)="deleteElement(item.fsID)">delete</div>
             <h4 class="custom-h3">{{ item.title }}</h4>
-            <p class="custom-p">{{ item.desc | summary:50 }}</p>
-            <p class="custom-p">{{ item.fsID }}</p>
+            <p class="custom-p">{{ item.desc | summary:80 }}</p>
             <done-field [isDone]="item.isDone" (change)="onDoneChanged(
                 {
                     isDone: $event,
@@ -14,15 +17,43 @@
     </div>
 </div>
 
-<div class="custom-add-form" *ngIf="taskCreatorIsVisible">
-        <form>
-            <div class="form-group">
-                <input [(ngModel)]="taskTitle" name="taskTitle" type="text" class="form-control" id="title-id" placeholder="Enter Title">
+<!-- Slide Menu-->
+<aside class="side-menu__container" [ngClass]="{'side-menu__container-active': showMenu}" (click)="toggleMenu()">
+    <nav class="slide-menu" [ngClass]="{'slide-menu-active': showMenu}" (click)="$event.stopImmediatePropagation();">
+        <section class="menu-header">
+            <span class="greeting__text">Welcome Back</span>
+            <div class="profile-image__container">
+                <img src="https://avatars3.githubusercontent.com/u/5658460?s=460&v=4" alt="profile-image"
+                     class="profile__image">
             </div>
-            <div class="form-group">
-                <input [(ngModel)]="taskDescription" name="taskDescription" type="text" class="form-control" id="title-id" placeholder="Enter Description">
+            <div class="account-details">
+                <span class="name__text">Max Mustermann</span>
+                <span class="email__text">max.muster@gmail.com</span>
             </div>
-        </form>
-    <button type="submit" (click)="addItem()" class="btn btn-primary">Submit</button>
-</div>
-<app-add-item (click)="showForm()"></app-add-item>
+        </section>
+        <section class="menu-body">
+    
+        </section>
+        <section class="menu-footer">
+    
+        </section>
+    </nav>
+</aside>
+
+<!-- Slide Up add Task-->
+<aside class="TaskAdder__container" [ngClass]="{'TaskAdder__container-active': showTaskAdder}" (click)="toggleTaskAdder()">
+    <nav class="slide-TaskAdder" [ngClass]="{'slide-TaskAdder-active': showTaskAdder}" (click)="$event.stopImmediatePropagation();">
+        <section class="TaskAdder__color_container">
+            <span class="TaskAdder__head">Add a Task</span>
+            <div class="TaskAdder__form_container">
+                <form class="TaskAdder__form">
+                    <input [(ngModel)]="taskTitle" name="taskTitle" type="text" class="TaskAdder-title" id="title-id" placeholder="Enter Title">
+                    <textarea [(ngModel)]="taskDescription" name="taskDescription" type="text" class="TaskAdder-description" id="title-id" placeholder="Enter Description" cols="40" rows="5"></textarea>
+                    <input type="submit" value="Submit" class="TaskAdder-submit" (click)="addItem()"> 
+                </form>
+            </div>
+        </section>
+    </nav>
+</aside>
+
+<app-add-item (click)="toggleTaskAdder()"></app-add-item>
