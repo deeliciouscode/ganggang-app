@@ -1,2 +1,2 @@
 # ganggang-app
-Die App für die Verwaltung der Gang
+PWA demo for a simple Flatsharing App... have to finish it sometime.
